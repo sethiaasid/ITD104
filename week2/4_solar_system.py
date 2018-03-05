@@ -44,7 +44,7 @@ bgcolor('black')
 ##### Put your code for drawing the planets here
 # draw from left to right
 summ = 0
-distance = 160
+distance = 130
 dis_name = 50
 
 for i in range(len(name)):
@@ -54,11 +54,9 @@ for i in range(len(name)):
 	pencolor(colour[i])
 	down()
 	up()
-	goto(pos()[0], pos()[1]+dis_name)
+	goto(left+summ, -(diameter[i]/2+dis_name))
 	write(name[i], font=('size=12'))
-
-
+	summ += distance + diameter[min(i+1, len(name)-1)]
 # Exit gracefully
 hideturtle()
 done()
-

@@ -41,3 +41,24 @@ from random import randint
 
 
 # DEVELOP YOUR SOLUTION HERE
+
+num_star = 200
+width = 700
+height = 700
+size_star = 20
+
+setup(width, height)
+title("Starry night")
+bgcolor("black")
+penup()
+hideturtle()
+speed('fastest')
+colormode(255)
+
+for i in range(num_star):
+	goto(randint(- (width/2), (width/2)), randint(- (height/2), (height/2)))
+	r, g, b = randint(0, 255), randint(0, 255), randint(0, 255)
+	
+	dot(randint(1, size_star), (r, g, b))
+
+done()

@@ -43,3 +43,42 @@ from random import uniform, randint
 
 
 ## DEVELOP YOUR PROGRAM HERE
+max_blob = 200
+max_pen_width = 50
+max_dot_diameter = 100
+
+width = 700
+height = 700
+
+setup(width, height)
+title("Jackson Pollock")
+hideturtle()
+
+for i in range(max_blob):
+	pencolor(uniform(0, 1), uniform(0, 1), uniform(0, 1))
+	pensize(randint(1, max_pen_width))
+	goto(randint(-width/2, width/2), randint(-height/2, height/2))
+	dot(randint(1, max_dot_diameter))
+	
+done()
+
+# num_star = 200
+# width = 700
+# height = 700
+# size_star = 20
+
+# setup(width, height)
+# title("Starry night")
+# bgcolor("black")
+# penup()
+# hideturtle()
+# speed('fastest')
+# colormode(255)
+
+# for i in range(num_star):
+	# goto(randint(- (width/2), (width/2)), randint(- (height/2), (height/2)))
+	# r, g, b = randint(0, 255), randint(0, 255), randint(0, 255)
+	
+	# dot(randint(1, size_star), (r, g, b))
+
+# done()

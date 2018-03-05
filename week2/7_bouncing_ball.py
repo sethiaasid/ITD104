@@ -51,9 +51,20 @@ shape('beachball.gif') # make the turtle look like a ball
 # Set the drawing speed, if necessary
 speed('normal')
 
+# Windows settings
+width = 700
+height = 700
+
+
 ## PUT YOUR CODE HERE
+setup(width, height)
+
+
+while 1 == 1:
+	goto(randint(-width/2, width/2), -height/2)
+	goto(randint(-width/2, width/2),  height/2)
+	goto(-width/2, randint(-height/2, height/2))
+	goto( width/2, randint(-height/2, height/2))
 
 # Exit gracefully
 done()
-
-        

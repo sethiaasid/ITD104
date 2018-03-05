@@ -42,7 +42,7 @@ from random import choice, randint
 # Define some fixed values
 segment_size = 20 # pixels (size of each snake segment)
 overlap = 3 # pixels (how far the segments overlap)
-num_steps = 100
+num_steps = 10000
 snake_length = 10 # how many snake segments to display
 
 # Set up the drawing window
@@ -61,17 +61,19 @@ speed('fast')
 # *** YOUR TASK: Introduce a list here, initially empty,
 # in which to store "stamp identifiers" to keep track
 # of each snake segment
+stamplist = []
 
 # Draw the snake
 #
 # *** YOUR TASK: Modify this code so that the stamp
 # identifiers returned by the "stamp" function are stored
 # in the list
+
 for segment in range(snake_length):
   # Move to the next position (overlapping the previous step a little)
   forward(segment_size - overlap)
   # Draw the next segment
-  stamp()
+  stamplist.append(stamp())
 
 # Move the snake's segments along
 #
@@ -85,7 +87,8 @@ for step in range(num_steps):
   # Move to the next position (overlapping the previous step a little)
   forward(segment_size - overlap)
   # Draw the next segment
-  stamp()
+  stamplist.append(stamp())
+  clearstamp(stamplist.pop(0))
 
 # Exit gracefully
 hideturtle()

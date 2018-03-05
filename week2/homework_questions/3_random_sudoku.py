@@ -51,7 +51,12 @@ from random import choice
 
 # Define two helpful constant values you should use
 digits = '123456789'
-grid_size = 9
+grid_size = 10
+
+for i in range(grid_size):
+	for j in range(grid_size):
+		print(choice(digits), end = ' ')
+	print()
 
 # A suggested solution strategy:
 #

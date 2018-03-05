@@ -15,6 +15,19 @@ cardwell = [115, 90, 100, 46, 130, 200, 195, 10, 3, 8]
 daintree = [140, 120, 110, 53, 100, 50, 175]
 tully =    [115, 90, 100, 130, 200, 195]
 
+# Calculate the average rainfall
+aurukun_average = sum(aurukun)/len(aurukun)
+burdekin_average = sum(burdekin)/len(burdekin)
+cardwell_average = sum(cardwell)/len(cardwell)
+daintree_average = sum(daintree)/len(daintree)
+tully_average = sum(tully)/len(tully)
+
+# Find the highest average rainfall
+answer = max(aurukun_average, burdekin_average, cardwell_average)
+answer = max(answer, daintree_average, tully_average)
+
+print('The highest average rainfall is {}.'.format(answer))
+
 # Write code to calculate the highest average rainfall
 # and print the result in a meaningful message to the screen.
 #

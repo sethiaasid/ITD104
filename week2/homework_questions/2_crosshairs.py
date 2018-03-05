@@ -38,17 +38,36 @@ width(3) # ensure the crosshairs will be easily visible
 
 # 1. Move the turtle to the monster's centre (without drawing)
 #### YOUR CODE GOES HERE
+penup()
+monsters_centre_x = -150
+monsters_centre_y = -150
+goto(monsters_centre_x, monsters_centre_y)
 
 # 2. Draw the vertical line centred on the current position (and
 #    return to the starting point)
 #### YOUR CODE GOES HERE
+pendown()
+left(90)
+forward(100)
+left(180)
+forward(200)
+left(180)
+forward(100)
 
 # 3. Draw a horizontal line centred on the current position (and
 #    return to the starting point)
 #### YOUR CODE GOES HERE
+left(90)
+forward(100)
+left(180)
+forward(200)
+left(180)
+forward(100)
+
 
 # 4. Draw  the crosshair's circle centred on the current position
 #### YOUR CODE GOES HERE
+dot(10)
 
 # 5. Exit the program by hiding the turtle and releasing the
 #    drawing window
