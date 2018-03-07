@@ -53,7 +53,8 @@
 
 #### REPLACE THE "DO NOTHING" STATEMENT BELOW
 ##### WITH YOUR average FUNCTION DEFINITION
-pass
+def average(a, b):
+	return (a + b) / 2
 
 
 #---------------------------------------------------------
@@ -61,6 +62,6 @@ pass
 # file is run.  Uncomment the code below if you want to
 # run the tests automatically.
 
-##from doctest import testmod, REPORT_ONLY_FIRST_FAILURE
-##print(testmod(verbose = False,
-##              optionflags = REPORT_ONLY_FIRST_FAILURE))
+# from doctest import testmod, REPORT_ONLY_FIRST_FAILURE
+# print(testmod(verbose = False,
+#              optionflags = REPORT_ONLY_FIRST_FAILURE))

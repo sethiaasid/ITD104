@@ -26,7 +26,10 @@ from turtle import *
 setup(600, 400)
 
 ##### PUT YOUR CODE FOR DRAWING THE FLAG HERE
-pass
+bgcolor("red")
+penup()
+goto(0, 75)
+star(150, "yellow")
 
 # Exit gracefully
 hideturtle()

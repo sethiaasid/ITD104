@@ -50,6 +50,21 @@ title('"... and it\'s gold, Gold, GOLD for Australia!"')
 # Draw the five rings
 
 ###  PUT YOUR FUNCTION CALLS HERE
+def draw_ring(x, y, colour):
+	penup()
+	goto(x, y)
+	color(colour)
+	pensize(15)
+	pendown()
+	circle(100)
+	penup()
+
+list_x = [-240, 0, 240, -120, 120]
+list_y = [0, 0, 0, -120, -120]
+list_color = ['blue', 'black', 'red', 'yellow', 'green']
+
+for i in range(len(list_x)):
+	draw_ring(list_x[i], list_y[i], list_color[i])
 
 
 #  Shut down the drawing window

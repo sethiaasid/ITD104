@@ -70,14 +70,14 @@
 
 #### REPLACE THE "DO NOTHING" STATEMENT BELOW
 ##### WITH YOUR median FUNCTION DEFINITION
-pass
-
+def median(l):
+	return sorted(l)[int(len(l)/2)]
 
 #---------------------------------------------------------
 # This main program executes all the tests above when this
 # file is run.  Uncomment the code below if you want to
 # run the tests automatically.
 
-##from doctest import testmod, REPORT_ONLY_FIRST_FAILURE
-##print(testmod(verbose = False,
-##              optionflags = REPORT_ONLY_FIRST_FAILURE))
+# from doctest import testmod, REPORT_ONLY_FIRST_FAILURE
+# print(testmod(verbose = False,
+#              optionflags = REPORT_ONLY_FIRST_FAILURE))

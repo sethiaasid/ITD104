@@ -72,7 +72,8 @@ True
 
 #### REPLACE THE "DO NOTHING" STATEMENT BELOW WITH YOUR
 #### fahrenheit_to_celsius FUNCTION DEFINITION
-pass
+def fahrenheit_to_celsius(f):
+	return round((f - 32) * (5 / 9))
 
 
 #---------------------------------------------------------
@@ -80,6 +81,6 @@ pass
 # file is run.  Uncomment the code below if you want to
 # run the tests automatically.
 
-##from doctest import testmod, REPORT_ONLY_FIRST_FAILURE
-##print(testmod(verbose = False,
-##              optionflags = REPORT_ONLY_FIRST_FAILURE))
+# from doctest import testmod, REPORT_ONLY_FIRST_FAILURE
+# print(testmod(verbose = False,
+#              optionflags = REPORT_ONLY_FIRST_FAILURE))
