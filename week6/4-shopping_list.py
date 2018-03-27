@@ -37,16 +37,25 @@ window.title('Shopping list')
 
 # 1. Define a function which displays the user's current
 #    list choice in the text area when the button is pushed
+def isPressed():
+    text.insert(END, groceries[listbox.curselection()[0]] + '\n')
 
 # 2. Create a text area widget which will display the
 #    user's choices
+text = Text(window, height = 15, width = 15)
+text.pack()
 
 # 3. Create a listbox widget and insert all the grocery choices
 #    into it
+listbox = Listbox(window, selectmode = 'single')
+for item in groceries:
+    listbox.insert(END, item)
+listbox.pack()
+
 
 # 4. Create a button widget which calls the function defined
 #    above when the user pushes it
-
+Button(window, text = 'Add item', command = isPressed).pack()
 
 # Start the event loop to react to user inputs
 window.mainloop()
