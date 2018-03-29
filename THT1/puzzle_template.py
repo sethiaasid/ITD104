@@ -299,15 +299,16 @@ solution = [['Piece A', 'Top left'], ['Piece B', 'Top right'],
 tab_size = 30 # Circle with a radius is 30 pixels
 gap_size = 20 # 3/4 of circle
 
+
 # Draw a line from (x1, y1) to (x2, y2)
 # *** x1, y1 are coordinates of first point
 # *** x2, y2 are coordinates of the second point
 def line(x1, y1, x2, y2):
     # Setup the pen
     width(4)
-
-    # Go to position 1 then pendown and goto position 2
     penup()
+
+    # Go to first position then pendown and goto second position
     goto(x1, y1)
     pendown()
     goto(x2, y2)
@@ -315,18 +316,18 @@ def line(x1, y1, x2, y2):
     # Reset the pen
     width(1)
     penup()
+    
 
 # Draw a tab with a given direction at (x, y)
 def draw_tab(x, y, direction):
     # Setup the pen
     width(4)
+    penup()
 
-    # tab_heading stores the turtle direction
-	# Only this function can use tab_heading	
+    # Stores the turtle direction
     tab_heading = {'east' : 315, 'west' : 135, 'north' : 45, 'south' : 225}
 
     # Go to the position and draw
-    penup()
     goto(x, y)
     pendown()
     setheading(tab_heading[direction])
@@ -335,77 +336,85 @@ def draw_tab(x, y, direction):
     # Reset the pen
     width(1)
     penup()
+    
 
-# Draw a filled area with background color "bg_color"
-# *** and border color "border_color" with area
+# Draw a filled shape with given dots in "area"
+# and border color and background color
 def draw_area(area, bg_color, border_color):
-	# Fill background
-    # Setup fillcolor
-    width(0)
-    color(bg_color)
-	# Fill the area with given area
+    # Setup pen and colors
+    width(2)
+    color(border_color)
+    fillcolor(bg_color)
+    penup()
+    
+    # Draw the area with given area
+    goto(area[0][0], area[0][1])
+    pendown() # Draw the border
     begin_fill()
     for x, y in area: # coordinates of the points in area
         goto(x, y)
     end_fill()
 
-	# Draw border
-    width(2)
-    color(border_color)
-    goto(area[0][0], area[0][1]) # Go to first point
-    pendown()
-    for x, y in area:
-        goto(x, y)
-
-	# Reset the pen
+    # Reset the pen and colors
     color('black')
+    fillcolor('black')
     width(1)
     penup()
 
 
 # Draw piece A at the position (x, y)
 def piece_a(x, y):
-    top_coor = y + half_piece_size # Highest y in the piece
-    bottom_coor = y - half_piece_size # Lowest y in the piece
-    left_coor = x - half_piece_size # Highest x in the piece
-    right_coor = x + half_piece_size # Lowest x in the piece
+    top_coor = y + half_piece_size # Highest y_coordinate in the piece
+    bottom_coor = y - half_piece_size # Lowest y_coordinate in the piece
+    left_coor = x - half_piece_size # Highest x_coordinate in the piece
+    right_coor = x + half_piece_size # Lowest x_coordinate in the piece
 
     # This variable stores areas of the picture in the piece
     # *** each area is a colection of points
-    areas = [
-            # The tail of pikachu
+    areas = [# The tail of pikachu
             [[-11, -198], [9, -129], [-85, -132], [-134, -25], [-67, -31], 
-    		[-1, -42], [51, -54], [79, -62], [71, -91], [57, -130], [49, -149],
-    		[24, -150], [29, -158], [31, -170], [25, -186], [12, -197], 
-    		[-1, -201], [-11, -198]],
-        	# The ear
-        	[[97, -6], [79, -4], [65, -2], [53, 2], [33, 7], [9, 18], [-9, 29],
-        	[-21, 38], [-33, 50], [-11, 54], [15, 53], [47, 50], [70, 46], 
-        	[95, 39], [124, 29], [113, 25], [105, 18], [99, 8], [97, -1], 
-        	[97, -6]],
-        	# Black part in the ear
-        	[[33, 9], [-3, 26], [-21, 39], [-32, 52], [-13, 55], [3, 55], 
-        	[15, 54], [16, 39], [21, 26], [33, 9]],
-        	# Part of the face
-        	[[105, -20], [99, -46], [94, -82], [93, -106], [102, -126], 
-        	[105, -133], [102, -147], [149, -147], [149, -23], [141, -27], 
-        	[123, -30], [117, -27], [109, -22], [105, -20]],
-        	# Red piece in the face 
-        	[[150, -43], [141, -39], [130, -43], [126, -50], [122, -62], 
-        	[128, -73], [137, -76], [148, -72], [150, -43]],
-        	# Black part of the left eye
-        	[[147, -46], [143, -46], [139, -48], [138, -53], [138, -58], 
-        	[141, -62], [146, -61], [147, -46]],
-        	# White part of the left eye
-        	[[128, -130], [132, -117], [133, -106], [131, -100], [129, -94], 
-        	[126, -88], [122, -84], [117, -78], [111, -75], [105, -74], 
-        	[98, -78], [93, -86], [93, -107], [101, -126], [109, -129], 
-        	[117, -130], [128, -130]]]
+    	    [-1, -42], [51, -54], [79, -62], [71, -91], [57, -130], [49, -149],
+    	    [24, -150], [29, -158], [31, -170], [25, -186], [12, -197], 
+    	    [-1, -201], [-11, -198]],
+            
+            # The ear
+            [[97, -6], [79, -4], [65, -2], [53, 2], [33, 7], [9, 18], [-9, 29],
+            [-21, 38], [-33, 50], [-11, 54], [15, 53], [47, 50], [70, 46], 
+            [95, 39], [124, 29], [113, 25], [105, 18], [99, 8], [97, -1], 
+            [97, -6]],
+            
+            # Black part in the ear
+            [[33, 9], [-3, 26], [-21, 39], [-32, 52], [-13, 55], [3, 55], 
+            [15, 54], [16, 39], [21, 26], [33, 9]],
+            
+            # Part of the face
+            [[105, -20], [99, -46], [94, -82], [93, -106], [102, -126], 
+            [105, -133], [102, -147], [149, -147], [149, -23], [141, -27], 
+            [123, -30], [117, -27], [109, -22], [105, -20]],
+            
+            # Red piece in the face 
+            [[150, -43], [141, -39], [130, -43], [126, -50], [122, -62], 
+            [128, -73], [137, -76], [148, -72], [150, -43]],
+            
+            # Black part of the left eye
+            [[147, -46], [143, -46], [139, -48], [138, -53], [138, -58], 
+            [141, -62], [146, -61], [147, -46]],
+            
+            # White part of the left eye
+            [[128, -130], [132, -117], [133, -106], [131, -100], [129, -94], 
+            [126, -88], [122, -84], [117, -78], [111, -75], [105, -74], 
+            [98, -78], [93, -86], [93, -107], [101, -126], [109, -129], 
+            [117, -130], [128, -130]]]
 
     # Background colors and border colors of areas
-    col = [['yellow', 'black'], ['yellow', 'black'], ['black', 'black'], 
-    ['yellow', 'black'], ['black', 'black'], ['white', 'white'], 
-    ['red', 'black']]
+    color_set = [['yellow', 'black'],   # The tail of pikachu
+                ['yellow', 'black'],    # The ear
+                ['black', 'black'],     # Black part in the ear
+                ['yellow', 'black'],    # Part of the face
+                ['black', 'black'],     # Red piece in the face
+                ['white', 'white'],     # Black part of the left eye
+                ['red', 'black']]       # White part of the left eye
+    
 
     # Redefine areas
     # (x, y) is the origin of the area
@@ -439,68 +448,81 @@ def piece_a(x, y):
 
     # Draw areas
     for area_index in range(len(areas)):
-    	draw_area(areas[area_index], col[area_index][0], col[area_index][1])
+    	draw_area(areas[area_index], color_set[area_index][0], color_set[area_index][1])
 
 
 # Draw piece B at the position (x,y)
 def piece_b(x, y):
-    top_coor = y + half_piece_size # Highest y in the piece
-    bottom_coor = y - half_piece_size # Lowest y in the piece
-    left_coor = x - half_piece_size # Highest x in the piece
-    right_coor = x + half_piece_size # Lowest x in the piece
+    top_coor = y + half_piece_size # Highest y_coordinate in the piece
+    bottom_coor = y - half_piece_size # Lowest y_coordinate in the piece
+    left_coor = x - half_piece_size # Highest x_coordinate in the piece
+    right_coor = x + half_piece_size # Lowest x_coordinate in the piece
 
     # This variable stores areas of the picture in the piece
     # *** each area is a colection of points
-    areas = [
-            # The whole area of pikachu
+    areas = [# The whole area of pikachu
             [[-151, 21], [-149, 30], [-137, 33], [-123, 36], [-111, 36], 
-    		[-96, 38], [-85, 36], [-72, 34], [-59, 32], [-47, 26], [-39, 23], 
-    		[-20, 42], [-1, 59], [18, 74], [41, 87], [62, 97], [83, 104], 
-    		[112, 110], [105, 90], [94, 78], [81, 66], [58, 45], [38, 29], 
-    		[20, 17], [-11, -6], [-4, -34], [1, -66], [4, -90], [3, -106], 
-    		[-1, -117], [-6, -130], [-5, -151], [2, -198], [-7, -200], 
-    		[-15, -195], [-22, -189], [-25, -185], [-28, -177], [-29, -169], 
-    		[-27, -163], [-25, -155], [-21, -150], [-151, -149], [-151, -22], 
-    		[-159, -27], [-179, -30], [-191, -23], [-195, -19], [-191, -8], 
-    		[-199, -5], [-201, 5], [-199, 13], [-192, 22], [-181, 28], 
-    		[-171, 30], [-161, 27], [-151, 21]],
-    		# The red piece on the face
-    		[[4, -102], [4, -89], [-1, -80], [-5, -76], [-15, -74], [-26, -82],
-    		[-33, -94], [-35, -105], [-35, -114], [-34, -122], [-29, -129], 
-    		[-23, -131], [-19, -131], [-13, -127], [-7, -123], [-2, -117], 
-    		[3, -110], [3, -99], [4, -102]],
-    		# The black piece on the ear
-    		[[57, 45], [67, 69], [69, 78], [69, 84], [66, 91], [59, 96], 
-    		[80, 103], [96, 108], [112, 110], [105, 93], [93, 78], [81, 66], 
-    		[57, 43], [57, 45]],
-    		# Small black part of the left eye
-    		[[-147, -45], [-145, -50], [-143, -57], [-144, -63], [-150, -70], 
-    		[-150, -44], [-147, -45]],
-    		# Black part of the right eye
-    		[[-29, -50], [-31, -47], [-34, -44], [-38, -42], [-43, -39], 
-    		[-50, -42], [-56, -46], [-59, -51], [-59, -61], [-58, -68], 
-    		[-52, -73], [-45, -75], [-39, -74], [-33, -72], [-29, -66], 
-    		[-28, -62], [-30, -52], [-29, -50]],
-    		# White part of the right eye
-    		[[-45, -62], [-43, -59], [-41, -56], [-41, -55], [-42, -51], 
-    		[-42, -50], [-45, -48], [-47, -46], [-49, -46], [-51, -47], 
-    		[-53, -47], [-53, -49], [-55, -50], [-55, -53], [-55, -55], 
-    		[-55, -57], [-52, -59], [-48, -62], [-47, -61], [-45, -62]],
-    		# The mouth
-    		[[-135, -102], [-132, -106], [-128, -108], [-124, -110], 
-			[-119, -108], [-102, -103], [-83, -109], [-78, -109], [-75, -108],
-			[-69, -101], [-75, -108], [-78, -109], [-83, -109], [-102, -103], 
-			[-119, -108], [-124, -110], [-128, -108], [-132, -106], 
-			[-135, -102]],
-			# The nose
-			[[-98, -83], [-100, -86], [-106, -82], [-98, -83]],
-			# Small draw of the right hand
-			[[-2, -185], [-4, -199], [-2, -185]]]
+    	    [-96, 38], [-85, 36], [-72, 34], [-59, 32], [-47, 26], [-39, 23], 
+    	    [-20, 42], [-1, 59], [18, 74], [41, 87], [62, 97], [83, 104], 
+    	    [112, 110], [105, 90], [94, 78], [81, 66], [58, 45], [38, 29], 
+    	    [20, 17], [-11, -6], [-4, -34], [1, -66], [4, -90], [3, -106], 
+    	    [-1, -117], [-6, -130], [-5, -151], [2, -198], [-7, -200], 
+    	    [-15, -195], [-22, -189], [-25, -185], [-28, -177], [-29, -169], 
+    	    [-27, -163], [-25, -155], [-21, -150], [-151, -149], [-151, -22], 
+    	    [-159, -27], [-179, -30], [-191, -23], [-195, -19], [-191, -8], 
+    	    [-199, -5], [-201, 5], [-199, 13], [-192, 22], [-181, 28], 
+    	    [-171, 30], [-161, 27], [-151, 21]],
 
-	# Background colors and border colors of areas
-    col = [['yellow', 'black'], ['red', 'black'], ['black', 'black'], 
-    ['black', 'black'], ['black', 'black'], ['white', 'white'], 
-    ['black', 'black'], ['black', 'black'], ['black', 'black']]
+    	    # The red piece on the face
+    	    [[4, -102], [4, -89], [-1, -80], [-5, -76], [-15, -74], [-26, -82],
+    	    [-33, -94], [-35, -105], [-35, -114], [-34, -122], [-29, -129], 
+    	    [-23, -131], [-19, -131], [-13, -127], [-7, -123], [-2, -117], 
+    	    [3, -110], [3, -99], [4, -102]],
+
+    	    # The black piece on the ear
+    	    [[57, 45], [67, 69], [69, 78], [69, 84], [66, 91], [59, 96], 
+    	    [80, 103], [96, 108], [112, 110], [105, 93], [93, 78], [81, 66], 
+    	    [57, 43], [57, 45]],
+
+    	    # Small black part of the left eye
+    	    [[-147, -45], [-145, -50], [-143, -57], [-144, -63], [-150, -70], 
+    	    [-150, -44], [-147, -45]],
+
+    	    # Black part of the right eye
+    	    [[-29, -50], [-31, -47], [-34, -44], [-38, -42], [-43, -39], 
+    	    [-50, -42], [-56, -46], [-59, -51], [-59, -61], [-58, -68], 
+    	    [-52, -73], [-45, -75], [-39, -74], [-33, -72], [-29, -66], 
+    	    [-28, -62], [-30, -52], [-29, -50]],
+
+    	    # White part of the right eye
+    	    [[-45, -62], [-43, -59], [-41, -56], [-41, -55], [-42, -51], 
+    	    [-42, -50], [-45, -48], [-47, -46], [-49, -46], [-51, -47], 
+    	    [-53, -47], [-53, -49], [-55, -50], [-55, -53], [-55, -55], 
+    	    [-55, -57], [-52, -59], [-48, -62], [-47, -61], [-45, -62]],
+
+    	    # The mouth
+    	    [[-135, -102], [-132, -106], [-128, -108], [-124, -110], 
+	    [-119, -108], [-102, -103], [-83, -109], [-78, -109], [-75, -108],
+	    [-69, -101], [-75, -108], [-78, -109], [-83, -109], [-102, -103], 
+	    [-119, -108], [-124, -110], [-128, -108], [-132, -106], 
+	    [-135, -102]],
+
+	    # The nose
+	    [[-98, -83], [-100, -86], [-106, -82], [-98, -83]],
+
+	    # Small draw of the right hand
+	    [[-2, -185], [-4, -199], [-2, -185]]]
+
+    # Background colors and border colors of areas
+    color_set = [['yellow', 'black'],   # The whole area of pikachu
+    		['red', 'black'],       # The red piece on the face
+    		['black', 'black'],     # The black piece on the ear
+    		['black', 'black'],     # Small black part of the left eye
+    		['black', 'black'],     # Black part of the right eye
+    		['white', 'white'],     # White part of the right eye
+    		['black', 'black'],     # The mouth
+    		['black', 'black'],     # The nose
+    		['black', 'black']]     # Small draw of the right hand
 
     # Redefine areas
     # (x, y) is the origin of the area
@@ -529,47 +551,53 @@ def piece_b(x, y):
 
     # Draw areas
     for area_index in range(len(areas)):
-        draw_area(areas[area_index], col[area_index][0], col[area_index][1])
+        draw_area(areas[area_index], color_set[area_index][0], color_set[area_index][1])
 
-    
+
 # Draw piece C at the position (x,y)
 def piece_c(x, y):
-    top_coor = y + half_piece_size # Highest y in the piece
-    bottom_coor = y - half_piece_size # Lowest y in the piece
-    left_coor = x - half_piece_size # Highest x in the piece
-    right_coor = x + half_piece_size # Lowest x in the piece
+    top_coor = y + half_piece_size # Highest y_coordinate in the piece
+    bottom_coor = y - half_piece_size # Lowest y_coordinate in the piece
+    left_coor = x - half_piece_size # Highest x_coordinate in the piece
+    right_coor = x + half_piece_size # Lowest x_coordinate in the piece
 
     # This variable stores areas of the picture in the piece
     # *** each area is a colection of points
-    areas = [
-            # Whole piece of the pikachu
+    areas = [# Whole piece of the pikachu
             [[-12, 103], [-15, 86], [25, 90], [58, 94], [47, 45], [88, 46], 
-		    [84, 31], [81, 14], [79, -6], [80, -22], [83, -38], [89, -53], 
-		    [99, -69], [110, -74], [126, -76], [139, -76], [149, -73], 
-		    [150, -21], [155, -23], [161, -26], [169, -28], [175, -26], 
-		    [182, -25], [187, -21], [193, -17], [197, -13], [199, -7], 
-		    [201, -5], [201, 8], [197, 16], [191, 24], [181,30], [167, 32], 
-		    [161, 30], [151, 23], [149, 152], [103, 151], [100, 134], [99,118],
-		    [97, 95], [96, 77], [93, 69], [81, 70], [94, 126], [43, 134], 
-		    [49, 150], [24, 150], [29, 142], [31, 130], [30, 122], [26, 114], 
-		    [17, 105], [9, 101], [-5, 100], [-12, 103]],
-		    # Left leg
-		    [[112, -74], [107, -82], [104, -86], [104, -94], [110, -94], 
-		    [111, -97], [118, -93], [123, -95], [143, -82], [144, -75], 
-		    [136, -77], [128, -77], [124, -77], [117, -75], [112, -74]],
-		    # The brown part of the beginning of the tail
-		    [[88, 48], [94, 67], [81, 70], [85, 84], [83, 95], [77, 86], 
-		    [75, 93], [69, 83], [67, 95], [57, 81], [47, 44], [88, 47]],
-		    # Part of the left hand
-		    [[98, 110], [105, 71], [124, 43], [149, 23], [156, 22], [160, 24],
-		    [166, 26], [174, 31], [166, 26], [160, 24], [156, 22], [149, 23], 
-		    [124, 43], [105, 71], [98, 110]],
-		    # Part of the left hand
-		    [[142, 129], [149, 117], [142, 129]]]
+	    [84, 31], [81, 14], [79, -6], [80, -22], [83, -38], [89, -53], 
+	    [99, -69], [110, -74], [126, -76], [139, -76], [149, -73], 
+	    [150, -21], [155, -23], [161, -26], [169, -28], [175, -26], 
+	    [182, -25], [187, -21], [193, -17], [197, -13], [199, -7], 
+	    [201, -5], [201, 8], [197, 16], [191, 24], [181,30], [167, 32], 
+	    [161, 30], [151, 23], [149, 152], [103, 151], [100, 134], [99,118],
+	    [97, 95], [96, 77], [93, 69], [81, 70], [94, 126], [43, 134], 
+	    [49, 150], [24, 150], [29, 142], [31, 130], [30, 122], [26, 114], 
+	    [17, 105], [9, 101], [-5, 100], [-12, 103]],
+
+	    # Left leg
+	    [[112, -74], [107, -82], [104, -86], [104, -94], [110, -94], 
+	    [111, -97], [118, -93], [123, -95], [143, -82], [144, -75], 
+	    [136, -77], [128, -77], [124, -77], [117, -75], [112, -74]],
+
+	    # The brown part of the beginning of the tail
+	    [[88, 48], [94, 67], [81, 70], [85, 84], [83, 95], [77, 86], 
+	    [75, 93], [69, 83], [67, 95], [57, 81], [47, 44], [88, 47]],
+
+	    # Part of the left hand
+	    [[98, 110], [105, 71], [124, 43], [149, 23], [156, 22], [160, 24],
+	    [166, 26], [174, 31], [166, 26], [160, 24], [156, 22], [149, 23], 
+	    [124, 43], [105, 71], [98, 110]],
+
+	    # Part of the left hand
+	    [[142, 129], [149, 117], [142, 129]]]
 
     # Background colors and border colors of areas
-    col = [['yellow', 'black'], ['gold', 'black'], ['SaddleBrown', 'black'], 
-    ['black', 'black'], ['black', 'black']]
+    color_set = [['yellow', 'black'], 		# Whole piece of the pikachu
+    		['gold', 'black'], 		# Left leg
+    		['SaddleBrown', 'black'], 	# The brown part of the beginning of the tail
+    		['black', 'black'], 		# Part of the left hand
+    		['black', 'black']]		# Part of the left hand
 
     # Redefine areas
     # (x, y) is the origin of the area
@@ -603,52 +631,56 @@ def piece_c(x, y):
 
     # Draw areas
     for area_index in range(len(areas)):
-        draw_area(areas[area_index], col[area_index][0], col[area_index][1])
+        draw_area(areas[area_index], color_set[area_index][0], color_set[area_index][1])
 
 
 # Draw piece D at the position (x,y)
 def piece_d(x, y):
-    top_coor = y + half_piece_size # Highest y in the piece
-    bottom_coor = y - half_piece_size # Lowest y in the piece
-    left_coor = x - half_piece_size # Highest x in the piece
-    right_coor = x + half_piece_size # Lowest x in the piece
+    top_coor = y + half_piece_size # Highest y_coordinate in the piece
+    bottom_coor = y - half_piece_size # Lowest y_coordinate in the piece
+    left_coor = x - half_piece_size # Highest x_coordinate in the piece
+    right_coor = x + half_piece_size # Lowest x_coordinate in the piece
 
     # This variable stores areas of the picture in the piece
     # *** each area is a colection of points
-    areas = [
-            # The whole piece of pikachu
+    areas = [# The whole piece of pikachu
             [[-150, 149], [-151, 24], [-143, 30], [-132, 31], [-122, 31], 
-    		[-111, 25], [-103, 16], [-100, 7], [-100, -6], [-103, -13], 
-    		[-109, -19], [-119, -26], [-126, -28], [-134, -29], [-139, -27], 
-    		[-146, -22], [-151, -22], [-151, -74], [-139, -68], [-132, -65], 
-    		[-125, -62], [-118, -62], [-103, -63], [-91, -63], [-80, -63], 
-    		[-75, -66], [-68, -68], [-59, -74], [-48, -77], [-39, -78], 
-    		[-31, -78], [-22, -77], [-11, -73], [-2, -66], [4, -59], [9, -52], 
-    		[12, -44], [14, -37], [16, -28], [17, -14], [17, -1], [9, 40], 
-    		[4, 75], [1, 98], [-4, 98], [-14, 102], [-21, 108], [-26, 114], 
-    		[-27, 121], [-28, 127], [-27, 134], [-26, 141], [-23, 145], 
-    		[-19, 150], [-150, 149]],
-    		# The right leg
-    		[[-54, -75], [-55, -82], [-42, -90], [-26, -95], [-19, -94], 
-    		[-16, -94], [-14, -89], [-19, -75], [-26, -77], [-34, -78], 
-    		[-42, -78], [-54, -75]],
-    		# Part of the left hand
-    		[[-149, 114], [-135, 90], [-127, 70], [-121, 45], [-124, 39], 
-    		[-124, 34], [-124, 39], [-121, 45], [-127, 70], [-135, 90], 
-    		[-149, 114]],
-    		# The right hand
-    		[[-44, 130], [-59, 105], [-68, 89], [-77, 67], [-83, 46], 
-    		[-80, 40], [-83, 34], [-76, 26], [-70, 26], [-66, 22], [-64, 22], 
-    		[-59, 20], [-52, 27], [-38, 33], [-31, 38], [-24, 45], [-19, 51], 
-    		[-16, 57], [-12, 66], [-7, 80], [-6, 90], [-5, 99], [-6, 90], 
-			[-7, 80], [-12, 66], [-16, 57], [-19, 51], [-24, 45], [-31, 38], 
-			[-38, 33], [-52, 27], [-59, 20], [-64, 22], [-66, 22], [-70, 26], 
-			[-76, 26], [-83, 34], [-80, 40], [-83, 46], [-77, 67], [-68, 89], 
-			[-59, 105], [-44, 130], ]]
+            [-111, 25], [-103, 16], [-100, 7], [-100, -6], [-103, -13], 
+    	    [-109, -19], [-119, -26], [-126, -28], [-134, -29], [-139, -27], 
+    	    [-146, -22], [-151, -22], [-151, -74], [-139, -68], [-132, -65], 
+    	    [-125, -62], [-118, -62], [-103, -63], [-91, -63], [-80, -63], 
+    	    [-75, -66], [-68, -68], [-59, -74], [-48, -77], [-39, -78], 
+    	    [-31, -78], [-22, -77], [-11, -73], [-2, -66], [4, -59], [9, -52], 
+    	    [12, -44], [14, -37], [16, -28], [17, -14], [17, -1], [9, 40], 
+    	    [4, 75], [1, 98], [-4, 98], [-14, 102], [-21, 108], [-26, 114], 
+    	    [-27, 121], [-28, 127], [-27, 134], [-26, 141], [-23, 145], 
+    	    [-19, 150], [-150, 149]],
+
+    	    # The right leg
+    	    [[-54, -75], [-55, -82], [-42, -90], [-26, -95], [-19, -94], 
+    	    [-16, -94], [-14, -89], [-19, -75], [-26, -77], [-34, -78], 
+    	    [-42, -78], [-54, -75]],
+
+    	    # Part of the left hand
+    	    [[-149, 114], [-135, 90], [-127, 70], [-121, 45], [-124, 39], 
+    	    [-124, 34], [-124, 39], [-121, 45], [-127, 70], [-135, 90], 
+    	    [-149, 114]],
+
+    	    # The right hand
+    	    [[-44, 130], [-59, 105], [-68, 89], [-77, 67], [-83, 46], 
+    	    [-80, 40], [-83, 34], [-76, 26], [-70, 26], [-66, 22], [-64, 22], 
+    	    [-59, 20], [-52, 27], [-38, 33], [-31, 38], [-24, 45], [-19, 51], 
+    	    [-16, 57], [-12, 66], [-7, 80], [-6, 90], [-5, 99], [-6, 90], 
+	    [-7, 80], [-12, 66], [-16, 57], [-19, 51], [-24, 45], [-31, 38], 
+	    [-38, 33], [-52, 27], [-59, 20], [-64, 22], [-66, 22], [-70, 26], 
+	    [-76, 26], [-83, 34], [-80, 40], [-83, 46], [-77, 67], [-68, 89], 
+	    [-59, 105], [-44, 130], ]]
 
     # Background colors and border colors of areas
-    col = [['yellow', 'black'], ['gold', 'black'], ['black', 'black'], 
-    ['black', 'black']]
+    color_set = [['yellow', 'black'], 	# The whole piece of pikachu
+    		['gold', 'black'], 	# The right leg
+    		['black', 'black'], 	# Part of the left hand
+    		['black', 'black']]	# The right hand
 
     # Redefine areas
     # (x, y) is the origin of the area
@@ -682,7 +714,7 @@ def piece_d(x, y):
     
     # Draw areas
     for area_index in range(len(areas)):
-        draw_area(areas[area_index], col[area_index][0], col[area_index][1])
+        draw_area(areas[area_index], color_set[area_index][0], color_set[area_index][1])
 
 
 # Draw the jigsaw pieces as per the provided data set
@@ -691,30 +723,30 @@ def draw_attempt(attempt):
     for pie in attempt:
         # Get the coordinate of the piece
     	if pie[1] == 'Bottom left':
-    		x = template_centres[0][0]
-    		y = template_centres[0][1]
+            x = template_centres[0][0]
+            y = template_centres[0][1]
     	elif pie[1] == 'Bottom right':
-    		x = template_centres[1][0]
-    		y = template_centres[1][1]
+            x = template_centres[1][0]
+            y = template_centres[1][1]
     	elif pie[1] == 'Top left':
-    		x = template_centres[2][0]
-    		y = template_centres[2][1]
+            x = template_centres[2][0]
+            y = template_centres[2][1]
     	elif pie[1] == 'Top right':
-    		x = template_centres[3][0]
-    		y = template_centres[3][1]
+            x = template_centres[3][0]
+            y = template_centres[3][1]
     	else:
-    		x = box_centre[0]
-    		y = box_centre[1]
+            x = box_centre[0]
+            y = box_centre[1]
 
         # Get what piece must be printed
     	if pie[0] == 'Piece A':
-    		piece_a(x, y)
+    	    piece_a(x, y)
     	elif pie[0] == 'Piece B':
-    		piece_b(x, y)
+    	    piece_b(x, y)
     	elif pie[0] == 'Piece C':
-    		piece_c(x, y)
+    	    piece_c(x, y)
     	else:
-    		piece_d(x, y)
+    	    piece_d(x, y)
 
 #
 #--------------------------------------------------------------------#
